@@ -1,26 +1,21 @@
-name: Piximg Pro Runner
+name: Bot Runner
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # يعاود التشغيل كل 6 ساعات لضمان الاستمرارية
-  workflow_dispatch: # يسمح لك بتشغيله يدوياً
+    - cron: '0 */6 * * *' # يعاود يديماري كل 6 سوايع باش ما يحبسش
+  workflow_dispatch:
 
 jobs:
-  piximg_job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Set up Python Environment
-        uses: actions/setup-python@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: x-actions/setup-python@v2
         with:
           python-version: '3.9'
-
-      - name: Install Piximg Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyTelegramBotAPI requests
-
-      - name: Execute Piximg Pro Bot
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Bot
         run: python bot.py
